@@ -118,6 +118,6 @@ interface FindUpOptions extends GetAncestorsOptions {
   ignoreCase?: boolean // false
   className?: string // nil
   isA?: string // nil
-  predicate?: (instance: Instance) -> boolean // nil
+  predicate?: (instance: Instance) => boolean // nil
 }
 ```
