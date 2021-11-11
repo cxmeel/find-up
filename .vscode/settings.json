@@ -1,0 +1,5 @@
+{
+  "git.ignoreSubmodules": true,
+  "git.autoRepositoryDetection": "openEditors",
+  "git.detectSubmodules": false
+}

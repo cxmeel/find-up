@@ -1,0 +1,14 @@
+{
+  "name": "find-up-serve",
+  "tree": {
+    "$className": "DataModel",
+    "$ignoreUnknownInstances": true,
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "$ignoreUnknownInstances": true,
+      "FindUp": {
+        "$path": "default.project.json"
+      }
+    }
+  }
+}

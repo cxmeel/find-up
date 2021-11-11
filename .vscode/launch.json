@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "name": "PowerShell: Run Tests",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": ".vscode/scripts/run-tests",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}

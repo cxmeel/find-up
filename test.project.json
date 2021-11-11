@@ -1,0 +1,27 @@
+{
+  "name": "find-up-tests",
+  "tree": {
+    "$className": "DataModel",
+    "TestService": {
+      "$className": "TestService",
+      "$properties": {
+        "ExecuteWithStudioRun": true
+      },
+      "FindUp": {
+        "$path": "default.project.json"
+      },
+      "Packages": {
+        "$path": "modules"
+      },
+      "TestRunner": {
+        "$path": "test-runner.server.lua"
+      }
+    },
+    "Players": {
+      "$className": "Players",
+      "$properties": {
+        "CharacterAutoLoads": false
+      }
+    }
+  }
+}
