@@ -3,9 +3,10 @@ local GetAncestors = require(script.Parent.GetAncestors)
 local merge = require(script.Parent.Util.Merge)
 
 local NONE = require(script.Parent.Util.None)
+local _T = require(script.Parent.types)
 
 --[=[
-  @interface FindUpOptions
+  @interface FindUpAllOptions
   @within FindUp
   .ignoreCase boolean? -- Whether to ignore case when comparing names
   .className string? -- The class name of the instance to find
@@ -25,19 +26,14 @@ local NONE = require(script.Parent.Util.None)
   }
   ```
 ]=]
-export type FindUpOptions = GetAncestors.GetAncestorsOptions & {
-	ignoreCase: boolean?,
-	className: string?,
-	isA: string?,
-	predicate: ((instance: Instance) -> boolean)?,
-}
+export type FindUpOptions = _T.FindUpAllOptions
 
 local DEFAULT_OPTIONS = {
 	ignoreCase = NONE,
 	className = NONE,
 	isA = NONE,
 	predicate = NONE,
-} :: FindUpOptions
+} :: _T.FindUpAllOptions
 
 --[=[
   @function FindUpAll
@@ -45,7 +41,7 @@ local DEFAULT_OPTIONS = {
 
   @param self Instance -- The instance to start searching from
   @param name string -- The name of the instance to find
-  @param options FindUpOptions? -- The options to use when searching
+  @param options FindUpAllOptions? -- The options to use when searching
   @return {Instance} -- The instances found
 
   Returns all instances in the ancestry of `self` that satisfy the given
@@ -57,9 +53,9 @@ local DEFAULT_OPTIONS = {
   })
   ```
 ]=]
-local function FindUpAll(self: Instance, name: string, options: FindUpOptions?): { Instance }
+local function FindUpAll(self: Instance, name: string, options: _T.FindUpAllOptions?): { Instance }
 	local ancestry = GetAncestors(self, options :: GetAncestors.GetAncestorsOptions)
-	local opts: FindUpOptions = merge(DEFAULT_OPTIONS, options)
+	local opts: _T.FindUpAllOptions = merge(DEFAULT_OPTIONS, options)
 	local matches = {}
 
 	for _, ancestor in ancestry do

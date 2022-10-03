@@ -2,6 +2,7 @@
 local merge = require(script.Parent.Util.Merge)
 
 local NONE = require(script.Parent.Util.None)
+local _T = require(script.Parent.types)
 
 --[=[
   @interface GetAncestorsOptions
@@ -20,13 +21,9 @@ local NONE = require(script.Parent.Util.None)
   }
   ```
 ]=]
-export type GetAncestorsOptions = {
-	stopAt: Instance?,
-	includeSelf: boolean?,
-	includeStopAt: boolean?,
-}
+export type GetAncestorsOptions = _T.GetAncestorsOptions
 
-local DEFAULT_OPTIONS: GetAncestorsOptions = {
+local DEFAULT_OPTIONS: _T.GetAncestorsOptions = {
 	stopAt = NONE,
 	includeSelf = NONE,
 	includeStopAt = NONE,
@@ -52,8 +49,8 @@ local DEFAULT_OPTIONS: GetAncestorsOptions = {
   })
   ```
 ]=]
-local function GetAncestors(self: Instance, options: GetAncestorsOptions?): { Instance }
-	local opts: GetAncestorsOptions = merge(DEFAULT_OPTIONS, options)
+local function GetAncestors(self: Instance, options: _T.GetAncestorsOptions?): { Instance }
+	local opts: _T.GetAncestorsOptions = merge(DEFAULT_OPTIONS, options)
 	local ancestry = {}
 
 	if opts.includeSelf then
