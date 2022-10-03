@@ -13,12 +13,20 @@
       "ClassName": "RemoteEvent"
     },
     {
+      "Name": "SendMoney",
+      "ClassName": "RemoteFunction"
+    },
+    {
       "Name": "Methods",
       "ClassName": "Folder",
       "Children": [
         {
           "Name": "DoThing",
           "ClassName": "LocalScript"
+        },
+        {
+          "Name": "DoThing",
+          "ClassName": "IntValue"
         },
         {
           "Name": "Roact",
