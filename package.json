@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/find-up",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Find an Instance by walking up ancestors",
   "license": "MIT",
   "author": "csqrl (https://csqrl.dev)",

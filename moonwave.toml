@@ -1,0 +1,8 @@
+title = "FindUp"
+gitSourceBranch = "default"
+
+classOrder = ["FindUp"]
+
+[docusaurus.themeConfig.colorMode]
+respectPrefersColorScheme = true
+defaultMode = "dark"

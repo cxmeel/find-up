@@ -1,5 +1,13 @@
 {
+  "[lua]": {
+    "editor.defaultFormatter": "JohnnyMorganz.stylua",
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "git.ignoreSubmodules": true,
   "git.autoRepositoryDetection": "openEditors",
-  "git.detectSubmodules": false
+  "git.detectSubmodules": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
 }
