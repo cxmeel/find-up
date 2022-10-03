@@ -1,3 +1,3 @@
 --!strict
-local None = newproxy(false)::any
+local None = newproxy(false) :: any
 return None

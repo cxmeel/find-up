@@ -2,42 +2,79 @@
 local ReconcileOptions = require(script.Parent.Util.ReconcileOptions)
 local NONE = require(script.Parent.Util.None)
 
+--[=[
+  @interface GetAncestorsOptions
+  @within FindUp
+  .stopAt Instance? -- The instance to stop at
+  .includeSelf boolean? -- Whether to include `self` in the results
+  .includeStopAt boolean? -- Whether to include `stopAt` in the results
+
+  Default options:
+
+  ```lua
+  {
+    stopAt = nil,
+    includeSelf = nil,
+    includeStopAt = nil,
+  }
+  ```
+]=]
 export type GetAncestorsOptions = {
-  stopAt: Instance?,
-  includeSelf: boolean?,
-  includeStopAt: boolean?,
+	stopAt: Instance?,
+	includeSelf: boolean?,
+	includeStopAt: boolean?,
 }
 
 local DEFAULT_OPTIONS: GetAncestorsOptions = {
-  stopAt = NONE,
-  includeSelf = NONE,
-  includeStopAt = NONE,
+	stopAt = NONE,
+	includeSelf = NONE,
+	includeStopAt = NONE,
 }
 
-local function GetAncestors(self: Instance, options: GetAncestorsOptions?): {Instance}
-  local opts: GetAncestorsOptions = ReconcileOptions(DEFAULT_OPTIONS, options)
-  local ancestry = {}
+--[=[
+  @function GetAncestors
+  @within FindUp
 
-  if opts.includeSelf then
-    table.insert(ancestry, self)
-  end
+  @param self Instance -- The instance to start searching from
+  @param options GetAncestorsOptions? -- The options to use when searching
+  @return {Instance} -- The instances found
 
-  local parent = self.Parent
+  Returns all instances in the ancestry of `self`.
 
-  while parent do
-    if parent == opts.stopAt then
-      if opts.includeStopAt then
-        table.insert(ancestry, parent)
-      end
+  ```lua
+  local ancestors = GetAncestors(script)
 
-      break
-    end
+  local ancestors = GetAncestors(script, {
+    stopAt = game.Workspace,
+    includeSelf = true,
+    includeStopAt = true,
+  })
+  ```
+]=]
+local function GetAncestors(self: Instance, options: GetAncestorsOptions?): { Instance }
+	local opts: GetAncestorsOptions = ReconcileOptions(DEFAULT_OPTIONS, options)
+	local ancestry = {}
 
-    table.insert(ancestry, parent)
-    parent = parent.Parent
-  end
+	if opts.includeSelf then
+		table.insert(ancestry, self)
+	end
 
-  return ancestry
+	local parent = self.Parent
+
+	while parent do
+		if parent == opts.stopAt then
+			if opts.includeStopAt then
+				table.insert(ancestry, parent)
+			end
+
+			break
+		end
+
+		table.insert(ancestry, parent)
+		parent = parent.Parent
+	end
+
+	return ancestry
 end
 
 return GetAncestors

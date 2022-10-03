@@ -1,8 +1,4 @@
-*.rbxm*
-*.rbxl*
-
-roblox.toml
-testez.toml
+*.rbx*
 *.tsbuildinfo
 
 /dist
