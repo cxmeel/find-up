@@ -29,6 +29,7 @@ local DEFAULT_OPTIONS = {
 	isA = NONE,
 	predicate = NONE,
 	timeout = NONE,
+	__warnAfter__ = 5,
 } :: _T.WaitForSiblingOptions
 
 local function SatisfiesOptions(child: Instance, name: string, options: _T.WaitForSiblingOptions): boolean
@@ -113,7 +114,7 @@ local function WaitForSibling<T>(self: Instance, name: string, options: (_T.Wait
 		end)
 	else
 		task.spawn(function()
-			task.wait(5)
+			task.wait(opts.__warnAfter__)
 
 			if not resolved then
 				warn(string.format("Infinite yield possible on 'WaitForSibling(%s, %q)'", self.Name, name))

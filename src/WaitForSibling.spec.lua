@@ -27,19 +27,18 @@ return function()
 		local newenv = getfenv(WaitForSibling)
 		local didWarnSignal = Instance.new("BindableEvent")
 		local didWarn = false
-		local oldWarn = warn
 
-		newenv.warn = function(...)
+		function newenv.warn()
 			didWarn = true
 			didWarnSignal:Fire()
-
-			oldWarn(...)
 		end
 
 		local fenv = setfenv(WaitForSibling, newenv)
 
 		task.spawn(function()
-			fenv(TestRoot, "Thing100")
+			fenv(TestRoot, "Thing100", {
+				__warnAfter__ = 0.5,
+			})
 		end)
 
 		didWarnSignal.Event:Wait()
@@ -49,14 +48,14 @@ return function()
 
 	it("should resolve once the sibling is found", function()
 		task.spawn(function()
-			task.wait(3)
+			task.wait(0.5)
 
 			local sibling = Instance.new("Folder")
 			sibling.Name = "Thing10"
 			sibling.Parent = TestRoot.Parent
 		end)
 
-		local result = WaitForSibling(TestRoot, "Thing10", 5)
+		local result = WaitForSibling(TestRoot, "Thing10", 1)
 
 		expect(result).to.be.ok()
 		expect(result).to.be.a("userdata")
