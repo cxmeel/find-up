@@ -1,5 +1,10 @@
 {
+  "[lua]": {
+    "editor.defaultFormatter": "JohnnyMorganz.stylua",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+  },
   "git.ignoreSubmodules": true,
   "git.autoRepositoryDetection": "openEditors",
-  "git.detectSubmodules": false
+  "git.detectSubmodules": false,
 }
