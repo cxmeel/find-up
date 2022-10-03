@@ -1,17 +1,11 @@
-import { GetAncestorsOptions } from "./GetAncestors"
+import type { FindUpAllOptions } from "./types"
 
-export interface FindUpOptions extends GetAncestorsOptions {
-  ignoreCase?: boolean
-  className?: string
-  isA?: string
-  predicate?: (instance: Instance) => boolean
-}
+export const DEFAULT_OPTIONS: FindUpAllOptions
 
 export function FindUpAll(
   self: Instance,
   name: string,
-  options?: FindUpOptions
+  options?: FindUpAllOptions
 ): Instance[]
 
-export const DEFAULT_OPTIONS: FindUpOptions
 export default FindUpAll

@@ -1,8 +1,4 @@
-export interface GetAncestorsOptions {
-  stopAt?: Instance
-  includeSelf?: boolean
-  includeStopAt?: boolean
-}
+import type { GetAncestorsOptions } from "./types"
 
 export function GetAncestors(
   self: Instance,

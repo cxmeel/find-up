@@ -1,9 +1,9 @@
 import type { FindUpAllOptions } from "./types"
 
-export function FindUp<T = Instance>(
+export function FindFirstSibling<T = Instance>(
   self: Instance,
   name: string,
   options?: FindUpAllOptions
 ): T | undefined
 
-export default FindUp
+export default FindFirstSibling
