@@ -1,6 +1,7 @@
 --!strict
-local ReconcileOptions = require(script.Parent.Util.ReconcileOptions)
 local GetAncestors = require(script.Parent.GetAncestors)
+local merge = require(script.Parent.Util.Merge)
+
 local NONE = require(script.Parent.Util.None)
 
 --[=[
@@ -58,7 +59,7 @@ local DEFAULT_OPTIONS = {
 ]=]
 local function FindUpAll(self: Instance, name: string, options: FindUpOptions?): { Instance }
 	local ancestry = GetAncestors(self, options :: GetAncestors.GetAncestorsOptions)
-	local opts: FindUpOptions = ReconcileOptions(DEFAULT_OPTIONS, options)
+	local opts: FindUpOptions = merge(DEFAULT_OPTIONS, options)
 	local matches = {}
 
 	for _, ancestor in ancestry do

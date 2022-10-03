@@ -1,5 +1,6 @@
 --!strict
-local ReconcileOptions = require(script.Parent.Util.ReconcileOptions)
+local merge = require(script.Parent.Util.Merge)
+
 local NONE = require(script.Parent.Util.None)
 
 --[=[
@@ -52,7 +53,7 @@ local DEFAULT_OPTIONS: GetAncestorsOptions = {
   ```
 ]=]
 local function GetAncestors(self: Instance, options: GetAncestorsOptions?): { Instance }
-	local opts: GetAncestorsOptions = ReconcileOptions(DEFAULT_OPTIONS, options)
+	local opts: GetAncestorsOptions = merge(DEFAULT_OPTIONS, options)
 	local ancestry = {}
 
 	if opts.includeSelf then

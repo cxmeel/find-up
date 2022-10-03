@@ -1,5 +1,6 @@
 --!strict
-local ReconcileOptions = require(script.Parent.Util.ReconcileOptions)
+local merge = require(script.Parent.Util.Merge)
+
 local NONE = require(script.Parent.Util.None)
 
 --[=[
@@ -88,7 +89,7 @@ end
     @param options (WaitForSiblingOptions | number)? -- The options to use when searching or the timeout
 ]=]
 local function WaitForSibling<T>(self: Instance, name: string, options: (WaitForSiblingOptions | number)?): T?
-	local opts: WaitForSiblingOptions = ReconcileOptions(DEFAULT_OPTIONS, options)
+	local opts: WaitForSiblingOptions = merge(DEFAULT_OPTIONS, options)
 	local parent = assert(self.Parent, string.format("Instance %q is currently parented to nil", self.Name))
 
 	if typeof(options) == "number" then
