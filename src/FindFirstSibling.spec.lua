@@ -5,8 +5,6 @@ local FindFirstSibling = require(script.Parent.FindFirstSibling)
 local TestRoot = ReplicatedStorage.TestTarget:FindFirstChild("Thing2", true)
 
 return function()
-	print(TestRoot)
-
 	it("should find the first sibling", function()
 		local result = FindFirstSibling(TestRoot, "Thing1")
 
