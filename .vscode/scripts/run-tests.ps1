@@ -1,6 +1,6 @@
 $FILE_NAME = ".\test-place.rbxl"
-$TEST_PROJ = ".\test.project.json"
-$TEST_RUNR = ".\test-runner.server.lua"
+$TEST_PROJ = ".\tests\test.project.json"
+$TEST_RUNR = ".\tests\test-runner.server.lua"
 
 aftman install
 rojo build "$TEST_PROJ" -o "$FILE_NAME"

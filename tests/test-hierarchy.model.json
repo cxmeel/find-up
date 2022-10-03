@@ -1,0 +1,48 @@
+{
+  "ClassName": "Folder",
+  "Children": [
+    {
+      "Name": "RootPart",
+      "ClassName": "Part",
+      "Properties": {
+        "Size": [4, 4, 4]
+      }
+    },
+    {
+      "Name": "SendMoney",
+      "ClassName": "RemoteEvent"
+    },
+    {
+      "Name": "Methods",
+      "ClassName": "Folder",
+      "Children": [
+        {
+          "Name": "DoThing",
+          "ClassName": "LocalScript"
+        },
+        {
+          "Name": "Roact",
+          "ClassName": "ModuleScript"
+        },
+        {
+          "Name": "Things",
+          "ClassName": "Folder",
+          "Children": [
+            {
+              "Name": "Thing1",
+              "ClassName": "Part"
+            },
+            {
+              "Name": "Thing2",
+              "ClassName": "Part"
+            },
+            {
+              "Name": "Thing3",
+              "ClassName": "Part"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
