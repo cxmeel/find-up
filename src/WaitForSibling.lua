@@ -2,45 +2,36 @@
 local merge = require(script.Parent.Util.Merge)
 
 local NONE = require(script.Parent.Util.None)
+local _T = require(script.Parent.types)
 
 --[=[
-    @interface WaitForSiblingOptions
-    @within FindUp
-    .ignoreCase boolean? -- Whether to ignore case when comparing names
-    .className string? -- The class name of the instance to find
-    .isA string? -- Performs an `:IsA` check on each child
-    .predicate function? -- A function that should return true if the instance is a match
-    .timeout number? -- The maximum time to wait for the instance to appear
+	@interface WaitForSiblingOptions
+	@within FindUp
+	.timeout number? -- The maximum time to wait for the instance to appear
 
-    Default options:
+	Extends [FindUpAllOptions].
 
-    ```lua
-    {
-      ignoreCase = nil,
-      className = nil,
-      isA = nil,
-      predicate = nil,
-      timeout = nil,
-    }
-    ```
+	Default options:
+
+	```lua
+	{
+	  ignoreCase = nil,
+	  className = nil,
+	  isA = nil,
+	  predicate = nil,
+	  timeout = nil,
+	}
+	```
 ]=]
-export type WaitForSiblingOptions = {
-	ignoreCase: boolean?,
-	className: string?,
-	isA: string?,
-	predicate: ((instance: Instance) -> boolean)?,
-	timeout: number?,
-}
-
 local DEFAULT_OPTIONS = {
 	ignoreCase = NONE,
 	className = NONE,
 	isA = NONE,
 	predicate = NONE,
 	timeout = NONE,
-} :: WaitForSiblingOptions
+} :: _T.WaitForSiblingOptions
 
-local function SatisfiesOptions(child: Instance, name: string, options: WaitForSiblingOptions): boolean
+local function SatisfiesOptions(child: Instance, name: string, options: _T.WaitForSiblingOptions): boolean
 	local ok, result = pcall(function()
 		if options.ignoreCase then
 			return child.Name:lower() == name:lower()
@@ -81,15 +72,15 @@ local function SatisfiesOptions(child: Instance, name: string, options: WaitForS
 end
 
 --[=[
-    @function WaitForSibling
-    @within FindUp
+	@function WaitForSibling
+	@within FindUp
 
-    @param self Instance -- The instance to start searching from
-    @param name string -- The name of the sibling to wait for
-    @param options (WaitForSiblingOptions | number)? -- The options to use when searching or the timeout
+	@param self Instance -- The instance to start searching from
+	@param name string -- The name of the sibling to wait for
+	@param options (WaitForSiblingOptions | number)? -- The options to use when searching or the timeout
 ]=]
-local function WaitForSibling<T>(self: Instance, name: string, options: (WaitForSiblingOptions | number)?): T?
-	local opts: WaitForSiblingOptions = merge(DEFAULT_OPTIONS, options)
+local function WaitForSibling<T>(self: Instance, name: string, options: (_T.WaitForSiblingOptions | number)?): T?
+	local opts: _T.WaitForSiblingOptions = merge(DEFAULT_OPTIONS, options)
 	local parent = assert(self.Parent, string.format("Instance %q is currently parented to nil", self.Name))
 
 	if typeof(options) == "number" then
@@ -115,7 +106,18 @@ local function WaitForSibling<T>(self: Instance, name: string, options: (WaitFor
 	if opts.timeout then
 		task.spawn(function()
 			task.wait(opts.timeout)
-			signal:Fire()
+
+			if not resolved then
+				signal:Fire()
+			end
+		end)
+	else
+		task.spawn(function()
+			task.wait(5)
+
+			if not resolved then
+				warn(string.format("Infinite yield possible on 'WaitForSibling(%s, %q)'", self.Name, name))
+			end
 		end)
 	end
 
