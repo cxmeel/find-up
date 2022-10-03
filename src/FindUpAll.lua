@@ -11,6 +11,8 @@ local NONE = require(script.Parent.Util.None)
   .isA string? -- Performs an `:IsA` check on each child
   .predicate function? -- A function that should return true if the instance is a match
 
+  Extends [GetAncestorsOptions].
+
   Default options:
 
   ```lua
@@ -59,13 +61,13 @@ local function FindUpAll(self: Instance, name: string, options: FindUpOptions?):
 	local opts: FindUpOptions = ReconcileOptions(DEFAULT_OPTIONS, options)
 	local matches = {}
 
-	for _, ancestor in ipairs(ancestry) do
-		for _, child in ipairs(ancestor:GetChildren()) do
+	for _, ancestor in ancestry do
+		for _, child in ancestor:GetChildren() do
 			local doesMatch = false
 
 			if opts.ignoreCase then
 				local ok, result = pcall(function()
-					return string.lower(child.Name) == string.lower(name)
+					return child.Name:lower() == name:lower()
 				end)
 
 				doesMatch = ok and result

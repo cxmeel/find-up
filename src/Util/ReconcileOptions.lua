@@ -4,7 +4,7 @@ local NONE = require(script.Parent.None)
 return function<T>(schema: T, input: any): T
 	local options = {}
 
-	for key, value in pairs(schema) do
+	for key, value in schema do
 		options[key] = if value == NONE then nil else value
 	end
 
@@ -12,7 +12,7 @@ return function<T>(schema: T, input: any): T
 		return options :: any
 	end
 
-	for key, _ in pairs(schema :: any) do
+	for key, _ in schema do
 		if input[key] ~= nil or input[key] ~= NONE then
 			options[key] = input[key]
 		end
