@@ -14,14 +14,18 @@ local _T = require(script.Parent.types)
 	@return Instance? -- The sibling found
 
 	Searches for the first sibling of `self` with the given name. This is a shortcut
-	for using `FindUp` with `stopAt` set to `self.Parent`.
+	for using `FindUp` with `stopAt` set to `self.Parent`, and `includeStopAt` set to `true`.
 
 	```lua
 	local sibling = FindFirstSibling(script, "ShopGuiFrame")
 	```
 ]=]
 local function FindFirstSibling(self: Instance, name: string, options: _T.FindUpAllOptions?): Instance?
-	local newOptions: _T.FindUpAllOptions = merge({ stopAt = self.Parent }, options)
+	local newOptions: _T.FindUpAllOptions = merge({
+		stopAt = self.Parent,
+		includeStopAt = true,
+	}, options)
+
 	return FindUp(self, name, newOptions)
 end
 
